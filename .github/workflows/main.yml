@@ -12,6 +12,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: Stop running bot
+      run: |
+        pkill -INT -f "python main.py" && sleep 10
+        pkill -KILL -f "python main.py" || true
+
       
     - name: Set up Python
       run: |
@@ -25,6 +31,9 @@ jobs:
         python -m venv venv
         source venv/bin/activate
         pip install -r requirements.txt
+    - name: Run Bot
+      run: |
+        source venv/bin/activate
+        python main.py
 
-    - name: Run bot
-      run: python main.py
+        
