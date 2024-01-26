@@ -12,12 +12,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-- name: Set up Python
-  run: |
-    sudo apt-get update
-    sudo apt-get install python3.9
-    python3 -m pip install --upgrade pip
+      
+    - name: Set up Python
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3.9
+        python3 -m pip install --upgrade pip
 
 
     - name: Install dependencies
