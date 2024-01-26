@@ -31,8 +31,6 @@ jobs:
         python -m venv venv
         source venv/bin/activate
         pip install -r requirements.txt
-
-    - name: Run bot
-      run: |
-        source venv/bin/activate
         python main.py
+
+        
