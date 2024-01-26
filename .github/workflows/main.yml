@@ -12,6 +12,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: Stop running bot
+      run: |
+        pkill -f "python main.py"
+        sleep 5  # Add a delay to ensure the bot is stopped properly
       
     - name: Set up Python
       run: |
