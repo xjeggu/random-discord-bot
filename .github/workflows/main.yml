@@ -34,6 +34,6 @@ jobs:
     - name: Run Bot
       run: |
         source venv/bin/activate
-        python main.py
+        nohup python main.py > log.txt 2>&1 &
 
         
