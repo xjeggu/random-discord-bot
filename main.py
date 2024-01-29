@@ -104,10 +104,12 @@ async def ping(ctx):
 
 @bot.slash_command(name='ping', description='Ping the bot to check latency.')
 async def ping(ctx: discord.ApplicationContext):
+    await ctx.defer()
     await ctx.respond(f'Pong! Latency: {round(bot.latency * 1000)}ms')
 
 @bot.slash_command(name='mute', description='Mute a User')
 async def ping(ctx: discord.ApplicationContext, user: Option(discord.User, "The Member you want to mute", required=True)):
+    await ctx.defer(ephemeral=True)
     muted_role = discord.utils.get(ctx.guild.roles, name='Muted')
 
     if not muted_role:
@@ -127,6 +129,7 @@ async def ping(ctx: discord.ApplicationContext, user: Option(discord.User, "The 
 
 @bot.slash_command(name='unmute', description='Mute a User')
 async def ping(ctx: discord.ApplicationContext, user: Option(discord.User, "The Member you want to unmute", required=True)):
+    await ctx.defer(ephemeral=True)
     muted_role = discord.utils.get(ctx.guild.roles, name='Muted')
     # Add the Muted role to the user
     await user.remove_roles(muted_role)
@@ -146,7 +149,7 @@ async def modal_slash(ctx: discord.ApplicationContext):
 
 @bot.slash_command(name='sound', description="Send a sound from myinstants.com")
 async def sound(ctx: discord.ApplicationContext, name: Option(str, "The Name of the sound", required=True)):
-    await ctx.defer()
+    await ctx.defer(ephemeral=True)
     global sounds
     sounds=get_sound_url(name,1000)
     sounds=json.loads(sounds)
@@ -155,6 +158,7 @@ async def sound(ctx: discord.ApplicationContext, name: Option(str, "The Name of 
 
 @bot.slash_command(name='clear', description="Clear the entire chat")
 async def clear_chat(ctx: discord.ApplicationContext):
+    await ctx.defer()
     # Check if the bot has the necessary permissions
     if ctx.guild and ctx.channel.permissions_for(ctx.guild.me).manage_messages:
         try:
@@ -169,6 +173,7 @@ async def clear_chat(ctx: discord.ApplicationContext):
 
 @bot.slash_command(name='kick', description='Kick a user from the server!')
 async def kick(ctx: discord.ApplicationContext, member: Option(discord.User, "The Member you want to kick", required=True), *, reason:Option(str, "The reason you want to kick him", required=False)):
+    await ctx.defer()
     if ctx.author.guild_permissions.kick_members:
         await member.kick(reason=reason)
         await ctx.respond(f'{member.mention} has been kicked from the server. Reason: {reason}')
@@ -177,6 +182,7 @@ async def kick(ctx: discord.ApplicationContext, member: Option(discord.User, "Th
 
 @bot.slash_command(name='ban', description='Ban a user from the server')
 async def ban(ctx: discord.ApplicationContext, user: Option(discord.User, "The Member you want to ban", required=True) , reason=None):
+    await ctx.defer()
     if ctx.author.guild_permissions.ban_members:
         await ctx.guild.ban(user, reason=reason)
         await ctx.respond(f'{user.mention} has been banned from the server. Reason: {reason}')
@@ -186,6 +192,7 @@ async def ban(ctx: discord.ApplicationContext, user: Option(discord.User, "The M
 
 @bot.slash_command(name='unban', description='Unban a user from the server')
 async def unban(ctx: discord.ApplicationContext, *, member:Option(discord.User, "The Member you want to unban", required=True)):
+    await ctx.defer()
     if ctx.author.guild_permissions.ban_members:
         banned_users = await ctx.guild.bans()
 
@@ -204,6 +211,7 @@ async def unban(ctx: discord.ApplicationContext, *, member:Option(discord.User, 
 
 @bot.slash_command(name='joke', description='Tells a random joke')
 async def joke(ctx: discord.ApplicationContext):
+    await ctx.defer()
     joke_api_url = 'https://official-joke-api.appspot.com/random_joke'
     try:
         response = requests.get(joke_api_url)
