@@ -145,12 +145,13 @@ async def modal_slash(ctx: discord.ApplicationContext):
 
 
 @bot.slash_command(name='sound', description="Send a sound from myinstants.com")
-async def sound(ctx: discord.ApplicationContext, name: Option(str, "The Name of the sound", required=True)):
+async def sound(ctx: discord.ApplicationContext,interaction: discord.Interaction, name: Option(str, "The Name of the sound", required=True)):
+    await interaction.response.defer()
     global sounds
     sounds=get_sound_url(name,1000)
     sounds=json.loads(sounds)
     view = SoundView(sounds)
-    await ctx.interaction.respond('Choose the sound you were looking for', view=view, ephemeral=True)
+    await ctx.respond('Choose the sound you were looking for', view=view, ephemeral=True)
 
 @bot.slash_command(name='clear', description="Clear the entire chat")
 async def clear_chat(ctx: discord.ApplicationContext):
