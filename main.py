@@ -150,7 +150,7 @@ async def sound(ctx: discord.ApplicationContext, name: Option(str, "The Name of 
     sounds=get_sound_url(name,1000)
     sounds=json.loads(sounds)
     view = SoundView(sounds)
-    await ctx.respond(f'Choose the sound you were looking for', view=view, ephemeral=True)
+    await ctx.respond('Choose the sound you were looking for', view=view, ephemeral=True)
 
 @bot.slash_command(name='clear', description="Clear the entire chat")
 async def clear_chat(ctx: discord.ApplicationContext):
