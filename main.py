@@ -145,8 +145,8 @@ async def modal_slash(ctx: discord.ApplicationContext):
 
 
 @bot.slash_command(name='sound', description="Send a sound from myinstants.com")
-async def sound(ctx: discord.ApplicationContext,interaction: discord.Interaction, name: Option(str, "The Name of the sound", required=True)):
-    await interaction.response.defer()
+async def sound(ctx: discord.ApplicationContext, name: Option(str, "The Name of the sound", required=True)):
+    await ctx.defer()
     global sounds
     sounds=get_sound_url(name,1000)
     sounds=json.loads(sounds)
