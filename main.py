@@ -166,7 +166,7 @@ async def clear_chat(ctx: discord.ApplicationContext):
 
 
 
-@bot.slash_command(name='kick', description='Kick a user from the server')
+@bot.slash_command(name='kick', description='Kick a user from the server!')
 async def kick(ctx: discord.ApplicationContext, member: Option(discord.User, "The Member you want to kick", required=True), *, reason:Option(str, "The reason you want to kick him", required=False)):
     if ctx.author.guild_permissions.kick_members:
         await member.kick(reason=reason)
