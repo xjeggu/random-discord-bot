@@ -1,12 +1,21 @@
 import discord
 from discord.ext import commands
 from discord.commands import Option
-from config import *
 from myinstantsapi import get_sound_url
 import json
 import aiohttp
 import io
 import requests
+import os
+
+try:
+    try:
+      from config import *
+    except:
+        token=os.getenv("BOT_TOKEN")
+        prefix=os.getenv("BOT_PREFIX")
+except Exception as e:
+    print(e)
 
 sounds=""
 
