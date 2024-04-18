@@ -249,6 +249,20 @@ async def joke(ctx: discord.ApplicationContext):
         await ctx.respond('Sorry, I couldn\'t fetch a joke at the moment.')
 
 
+async def download_image(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            img_data = await response.read()
+            file = io.BytesIO(img_data)
+            return file
+
+
+@bot.slash_command(name="cat", description="Sends a random cat Image")
+async def joke(ctx: discord.ApplicationContext):
+    await ctx.defer()
+    data = await download_image("https://cataas.com/cat")
+    file = discord.File(data, filename="cat.jpeg")
+    await ctx.respond(file=file)
 
 # Add more commands as needed
 
