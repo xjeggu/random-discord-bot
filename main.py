@@ -276,7 +276,7 @@ async def hangman(ctx:discord.ApplicationContext):
     guessed=False
     guessed_letters=[]
     attempts=6
-    await ctx.respond("Will be added soon")
+    await ctx.respond("Will be added soon!")
 
 # Add more commands as needed
 
