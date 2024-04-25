@@ -269,7 +269,7 @@ async def joke(ctx: discord.ApplicationContext):
     await ctx.respond(file=file)
 
 
-@bot.slash_command(name="Hangman", description="Start a game of Hangman")
+@bot.slash_command(name="hangman", description="Start a game of Hangman")
 async def hangman(ctx:discord.ApplicationContext):
     word = random.choice(hangmanwords)
     word_completion = "_" * len(word)
