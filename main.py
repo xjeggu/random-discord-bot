@@ -7,6 +7,10 @@ import aiohttp
 import io
 import requests
 import os
+import random
+
+
+hangmanwords = ["hangman", "python", "discord", "bot", "game", "programming", "computer"]
 
 try:
     try:
@@ -263,6 +267,16 @@ async def joke(ctx: discord.ApplicationContext):
     data = await download_image("https://cataas.com/cat")
     file = discord.File(data, filename="cat.jpeg")
     await ctx.respond(file=file)
+
+
+@bot.slash_command(name="Hangman", description="Start a game of Hangman")
+async def hangman(ctx:discord.ApplicationContext):
+    word = random.choice(hangmanwords)
+    word_completion = "_" * len(word)
+    guessed=False
+    guessed_letters=[]
+    attempts=6
+    await ctx.respond("Will be added soon")
 
 # Add more commands as needed
 
