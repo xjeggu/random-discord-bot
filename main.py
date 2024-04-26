@@ -10,7 +10,7 @@ import os
 import random
 
 
-hangmanwords = ["hangman", "python", "discord", "bot", "game", "programming", "computer"]
+hangmanwords = ["hangman", "python", "discord", "bot", "game", "programming", "computer", "youtube"]
 
 try:
     try:
